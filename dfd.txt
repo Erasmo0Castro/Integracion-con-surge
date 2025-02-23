@@ -1,0 +1,24 @@
+name: Deploy to Surge
+
+on:
+  push:
+    branches:
+      - main  # Cambia "main" si tu rama tiene otro nombre
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Surge and Deploy
+        run: |
+          npm install --global surge
+          surge --project ./ --domain tiny-kitty.surge.sh --token 5f8467012915cd835c4d76472777d46c
